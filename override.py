@@ -26,12 +26,9 @@ def overload(*, __overload_list__: dict = {}):
             informations_arg_func += f"({type_arg})"
             list_types_arg_func.append(str(type_arg))
 
-        # print(informations_arg_func)
-
         """Запись нашей функции, в словарь типа: __overload_list__[Название функции][Сгенерированные аргументы]"""
         __overload_list__[func.__name__][informations_arg_func] = func
         __overload_list__[func.__name__][KEY_LIST_TYPE_FUNC].add(tuple(list_types_arg_func))
-        print(__overload_list__)
 
         def wrapper(*args, **kwargs):
             """Генерация строки, с которая будет является ключем"""
@@ -58,15 +55,17 @@ def overload(*, __overload_list__: dict = {}):
             """Проверка, что аргументы являются дочерними от требующихся"""
             currect_arg_for_called_function = __overload_list__[func.__name__][KEY_LIST_TYPE_FUNC]
 
+            mro_types_transmitted_type = [type(arg).__mro__ for arg in args_for_called_function]
+            mro_types_transmitted_type_string = [str(arg) for arg in mro_types_transmitted_type]
+
+            name_file = str(mro_types_transmitted_type[0][0])[8:].split(".")[0]
+
             for currect_type in currect_arg_for_called_function:
-                mro_types_transmitted_type = list(map(lambda arg: type(arg).__mro__, args_for_called_function))
-                mro_types_transmitted_type_string = list(map(lambda arg: str(arg), mro_types_transmitted_type))
-
-                name_file = str(mro_types_transmitted_type[0][0])[8:].split(".")[0]
-
                 for index_type, need_type in enumerate(currect_type):
                     need_type_with_currect_name_file = need_type.replace("__multi_func__", name_file)
 
+                    if len(mro_types_transmitted_type_string) <= index_type:
+                        break
                     if not (need_type_with_currect_name_file in mro_types_transmitted_type_string[index_type]):
                         break
                 else:
