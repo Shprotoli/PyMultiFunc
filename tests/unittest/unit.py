@@ -5,6 +5,8 @@ from basic_type_test import (
 )
 from users_type_test import (
     UsersTypeTest,
+    InheritanceTypeTest,
+    CurrectAnalyzTypeTest,
 )
 from method_test import (
     MethodOverloadTest,
