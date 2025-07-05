@@ -56,13 +56,7 @@ def overload(*, __overload_list__: dict = {}):
 
 
             """Проверка, что аргументы являются дочерними от требующихся"""
-            currect_arg_for_called_function = list()
-            for overload in __overload_list__[func.__name__].keys():
-                if overload in SERVICE_KEYS:
-                    continue
-                overload_args = tuple(map(lambda arg: arg.replace(")", ""), overload.split("(")[1:]))
-                currect_arg_for_called_function.append(overload_args)
-            print(currect_arg_for_called_function)
+            currect_arg_for_called_function = __overload_list__[func.__name__][KEY_LIST_TYPE_FUNC]
 
             for currect_type in currect_arg_for_called_function:
                 mro_types_transmitted_type = list(map(lambda arg: type(arg).__mro__, args_for_called_function))
