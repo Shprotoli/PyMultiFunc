@@ -2,7 +2,7 @@
 
 Method and Function Overloading in Python
 
-# How Does It Work?
+# How Does It Work? (🇺🇸)
 
 PyMultiFunc overloading works similarly to languages that provide overloading "out of the box".
 
@@ -22,7 +22,9 @@ foo(5)      # called func `int`
 foo("str")  # called func `str`
 ```
 
-# Inheritance Analysis
+
+
+### Inheritance Analysis
 
 Do we need to specify the type as an abstract class?
 Here’s a simple example with cars:
@@ -71,7 +73,9 @@ foo(BMW())      # called with `BMW`
 foo(Tesla())    # called with `Tesla`
 ```
 
-# Overloading by Number of Arguments
+
+
+### Overloading by Number of Arguments
 
 You can also overload your functions based on the number of arguments:
 ```python
@@ -92,7 +96,9 @@ foo(5)        # a = int
 foo(5, 5)     # a = int, b = int
 ```
 
-# Overloading with Default Values
+
+
+### Overloading with Default Values
 
 Instead of passing an argument directly, you can use the `DEFAULT_ARG` class to represent a default value.
 > [!WARNING]
@@ -129,3 +135,13 @@ def foo(a: str, b: str = "default"):
 foo("shprot", "oli")             # shprot oli
 foo("this", DEFAULT_ARG(str))    # this default
 ```
+
+
+# Brief Overview of the Project Structure
+> [!NOTE]
+> - [📄(🐍)] `override.py` - Contains the main logic of the decorato
+> - [📄(🐍)] `exception.py` - Contains all exceptions that may occur when working with PyMultiFunc
+> - [📄(🐍)] `config.py` - Contains constants and other static arguments for analysis during decorator execution
+> - [📄(🐍)] `defaults_arg.py` - Contains classes (`DEFAULT_ARG` and others) that provide access to overriding arguments with default values
+> - [📁] `tests` - Contains tests for the decorator
+> - └── [📁] `unittest` - Unittest for decorater
