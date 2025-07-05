@@ -32,3 +32,6 @@ coverage.xml
 
 # Pycharm
 .idea/
+
+# git
+.gitignore
