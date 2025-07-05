@@ -1,4 +1,4 @@
-from .config import DEFAULT_ARG_TYPE, KEY_LIST_TYPE_FUNC, SERVICE_KEYS
+from .config import DEFAULT_ARG_TYPE, KEY_LIST_TYPE_FUNC
 from .exception import (
     NoDefaultsArgsError,
     NoDefaultValueForThisArgError,
