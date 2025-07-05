@@ -1,10 +1,12 @@
-Перегрузка методов и функций для Python.
+# [PyMultiFunc](https://github.com/Shprotoli/PyMultiFunc)
 
-# Как это работает?
+Method and Function Overloading in Python
 
-Перегрузка PyMultiFunc работает аналогично языкам,с предоставлением перегрузки из "коробки".
+# How Does It Work?
 
-Рассмотрим базовый пример:
+PyMultiFunc overloading works similarly to languages that provide overloading "out of the box".
+
+Let’s look at a basic example:
 ```python
 from py_multi_func.override import overload
 
@@ -20,9 +22,10 @@ foo(5)      # called func `int`
 foo("str")  # called func `str`
 ```
 
-# Анализ наследования
+# Inheritance Analysis
 
-Нужно указать типом абстрактный класс? Пожалйста, простой пример с машинами:
+Do we need to specify the type as an abstract class?
+Here’s a simple example with cars:
 ```python
 from py_multi_func.override import overload
 from abc import ABC
@@ -68,9 +71,9 @@ foo(BMW())      # called with `BMW`
 foo(Tesla())    # called with `Tesla`
 ```
 
-# Перегрузка по количеству
+# Overloading by Number of Arguments
 
-Вы также можете перегружать ваши функции по количеству аргументов:
+You can also overload your functions based on the number of arguments:
 ```python
 from py_multi_func.override import overload
 
@@ -89,13 +92,13 @@ foo(5)        # a = int
 foo(5, 5)     # a = int, b = int
 ```
 
-# Перегрузка со значениями по умолчанию
+# Overloading with Default Values
 
-Вместо того, чтобы передавать аргумент напрямую, вы можете использовать класс `DEFAULT_ARG`, для использования значения по умолчанию.
+Instead of passing an argument directly, you can use the `DEFAULT_ARG` class to represent a default value.
 > [!IMPORTANT]
-> Чтобы класс и его замена на аргумент по умолчанию работал корректно, нужно соблюдать несколько правил:
-> 1. В конструктор `DEFAULT_ARG` требуется передать тип, который стоит на месте аргумента со значением по умолчанию
-> 2. `DEFAULT_ARG` требует позиционирования в том месте, где у аргумента есть значение по умолчаню, например нельзя делать так!
+> To ensure the class and its replacement as a default argument work correctly, you must follow several rules:
+> 1. The constructor of `DEFAULT_ARG` must be given the type that corresponds to the argument with the default value.
+> 2. `DEFAULT_ARG` must be positioned exactly where the argument has a default value — for example, you cannot do this:
 > ```python
 > from py_multi_func.override import overload
 > from py_multi_func.defaults_arg import DEFAULT_ARG
@@ -110,7 +113,8 @@ foo(5, 5)     # a = int, b = int
 > # A good error that tells you where the `DEFAULT_ARG` is passed incorrectly
 > foo(DEFAULT_ARG(str), "somethink") 
 > ```
-> 3. Инициализированный `DEFAULT_ARG` нельзя передать, из-за специфики работы декоратора, если вам это требуется, то используйте `FAKE_DEFAULT_ARG`, он индентичен `DEFAULT_ARG`, но не заменяется на значение по умолчанию
+> 3. An initialized `DEFAULT_ARG` cannot be passed due to the specifics of how the decorator works.
+> If you need to pass such a value explicitly, use `FAKE_DEFAULT_ARG` instead — it is identical to `DEFAULT_ARG`, but it is not replaced with the default value.
 
 ```python
 from py_multi_func.override import overload
