@@ -1,4 +1,4 @@
-# [PyMultiFunc](https://github.com/Shprotoli/PyMultiFunc)
+# [PyMultiFunc – Your Assistant for Function Overloading](https://github.com/Shprotoli/PyMultiFunc)
 
 Method and Function Overloading in Python
 
@@ -95,7 +95,7 @@ foo(5, 5)     # a = int, b = int
 # Overloading with Default Values
 
 Instead of passing an argument directly, you can use the `DEFAULT_ARG` class to represent a default value.
-> [!IMPORTANT]
+> [!WARNING]
 > To ensure the class and its replacement as a default argument work correctly, you must follow several rules:
 > 1. The constructor of `DEFAULT_ARG` must be given the type that corresponds to the argument with the default value.
 > 2. `DEFAULT_ARG` must be positioned exactly where the argument has a default value — for example, you cannot do this:
