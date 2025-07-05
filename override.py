@@ -1,5 +1,5 @@
-from .config import DEFAULT_ARG_TYPE, KEY_LIST_TYPE_FUNC
-from .exception import (
+from py_multi_func.config import DEFAULT_ARG_TYPE, KEY_LIST_TYPE_FUNC
+from py_multi_func.exception import (
     NoDefaultsArgsError,
     NoDefaultValueForThisArgError,
     NoOverideError,

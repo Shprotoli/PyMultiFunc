@@ -33,30 +33,47 @@ class MethodOverloadTest(TestCase):
         cls.A_class = A()
 
     def test_currect_find(self):
-        self.assertEqual(self.A_class.foo("str"), "A str")
-        self.assertEqual(self.B_class.foo("str"), "B str")
-        self.assertEqual(self.A_class.foo(5), "A int")
-        self.assertEqual(self.B_class.foo(5), "B int")
+        result_1 = self.A_class.foo("str")
+        self.assertEqual(result_1, "A str")
+
+        result_2 = self.B_class.foo("str")
+        self.assertEqual(result_2, "B str")
+
+        result_3 = self.A_class.foo(5)
+        self.assertEqual(result_3, "A int")
+
+        result_4 = self.B_class.foo(5)
+        self.assertEqual(result_4, "B int")
 
 
 class WrapB:
     @overload()
     def __init__(self: "WrapB", a: int):
-        print("B int")
+        ...
 
     @overload()
     def __init__(self: "WrapB", a: str):
-        print("B str")
+        ...
 
 
 class WrapA:
     @overload()
     def __init__(self: "WrapA", a: int):
-        print("A int")
+        ...
 
     @overload()
     def __init__(self: "WrapA", a: str):
-        print("A str")
+        ...
+
+
+@overload()
+def test_wrapper_print(obj: WrapA):
+    return type(obj).__name__
+
+
+@overload()
+def test_wrapper_print(obj: WrapB):
+    return type(obj).__name__
 
 
 class WrapperOverloadTest(TestCase):
@@ -65,15 +82,14 @@ class WrapperOverloadTest(TestCase):
     """
 
     def test_wrapper(self):
-        @overload()
-        def print(obj: WrapA):
-            return "print A"
+        result_1 = test_wrapper_print(WrapA(5))
+        self.assertEqual(result_1, "WrapA")
 
-        @overload()
-        def print(obj: WrapB):
-            return "print B"
+        result_2 = test_wrapper_print(WrapA("str"))
+        self.assertEqual(result_2, "WrapA")
 
-        self.assertEqual(print(WrapA(5)), "print A")
-        self.assertEqual(print(WrapA("str")), "print A")
-        self.assertEqual(print(WrapB(5)), "print B")
-        self.assertEqual(print(WrapB("str")), "print B")
+        result_3 = test_wrapper_print(WrapB(5))
+        self.assertEqual(result_3, "WrapB")
+
+        result_4 = test_wrapper_print(WrapB("str"))
+        self.assertEqual(result_4, "WrapB")

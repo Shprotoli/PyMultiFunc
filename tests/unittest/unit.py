@@ -1,5 +1,4 @@
 from unittest import main
-
 from basic_type_test import (
     SimpleTypeTest,
     ContainersTypeTest,
